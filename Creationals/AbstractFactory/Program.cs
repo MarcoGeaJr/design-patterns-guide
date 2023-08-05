@@ -1,6 +1,7 @@
-﻿using AbstractFactory.Abstract;
-using AbstractFactory.Abstract.Products;
-using AbstractFactory.Factory;
+﻿using AbstractFactory.Abstracts.Factory;
+using AbstractFactory.Abstracts.Product;
+using AbstractFactory.Concretes.Factories;
+using AbstractFactory.Models;
 
 namespace AbstractFactory;
 
@@ -8,28 +9,55 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        Console.WriteLine();
+
         // concrect instance of abstract factory
-        IStoreAbstractFactory abstractFactory = new StoreAbstractFactory();
+        IEcommerceAbstractFactory ecommerceFactory = new EcommerceConcreteFactory();
 
-        // Physical store product factory
-        IProductStoreFactory physicalStore = abstractFactory.CreatePhysicalStore();
+        ShippingProduct shippingProduct = new ShippingProduct(weight: 0.568m, width: 25m, height: 10m, depth: 5m);
+        decimal distance = 50; // 50km
 
-        // Online store product factory
-        IProductStoreFactory onlineStore = abstractFactory.CreateOnlineStore();
+        #region E-commerce A
+        // E-commerce A shipping factory
+        IShippingFactory ecommerceA = ecommerceFactory.CreateEcommerceA();
 
-        // Instace of physical product
-        IProduct pyhsicalProduct = physicalStore.CreateProduct("Physical Keyboard", 99.9M);
+        // Instace of owner shipping of E-commerce A
+        IShipping ownerShippingA = ecommerceA.CreateOwnerShipping();
 
-        // Instace of online product
-        IProduct onlineProduct = onlineStore.CreateProduct("Online Keyboard", 99.9M);
+        // Instace of outsourced shipping of E-commerce A
+        IShipping outsourcedShippingA = ecommerceA.CreateOutsourcedShipping();
 
-        // The ammount of discount must be applied for the both products
-        decimal commonDiscount = 10M;
+        Console.WriteLine("--------------------------------------");
+        Console.WriteLine("E-commerce A Shipping");
+        Console.WriteLine("--------------------------------------");
+        Console.WriteLine($"Owner Shipping Price: US{ownerShippingA.GetShippingPrice(shippingProduct, distance):C}");
+        Console.WriteLine($"Outsourced Shipping Price: US{outsourcedShippingA.GetShippingPrice(shippingProduct, distance):C}");
+        Console.WriteLine("--------------------------------------");
+        #endregion
 
-        Console.WriteLine($"Physical Product Real Price: US$ {pyhsicalProduct.GetPrice(0)}");
-        Console.WriteLine($"Physical Product Price: US$ {pyhsicalProduct.GetPrice(commonDiscount)}");
-        Console.WriteLine($"Online Product RealPrice: US$ {onlineProduct.GetPrice(0)}");
-        Console.WriteLine($"Online Product Price: US$ {onlineProduct.GetPrice(commonDiscount)}");
+        Console.WriteLine();
+        Console.WriteLine("======================================");
+        Console.WriteLine();
+
+        #region E-commerce B
+        // E-commerce B shipping factory
+        IShippingFactory ecommerceB = ecommerceFactory.CreateEcommerceB();
+
+        // Instace of owner shipping of E-commerce B
+        IShipping ownerShippingB = ecommerceB.CreateOwnerShipping();
+
+        // Instace of outsourced shipping of E-commerce B
+        IShipping outsourcedShippingB = ecommerceB.CreateOutsourcedShipping();
+
+        Console.WriteLine("--------------------------------------");
+        Console.WriteLine("E-commerce B Shipping");
+        Console.WriteLine("--------------------------------------");
+        Console.WriteLine($"Owner Shipping Price: US{ownerShippingB.GetShippingPrice(shippingProduct, distance):C}");
+        Console.WriteLine($"Outsourced Shipping Price: US{outsourcedShippingB.GetShippingPrice(shippingProduct, distance):C}");
+        Console.WriteLine("--------------------------------------");
+        #endregion
+
+        Console.WriteLine();
         Console.ReadLine();
     }
 }
