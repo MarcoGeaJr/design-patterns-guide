@@ -26,7 +26,7 @@ Mentenha em mente: os padrões de projetos são uma solução para algum problem
 
 ## Os padrões
 
-### Creatinoal
+### Criacionais
 Segundo [refactoring.guru](https://refactoring.guru/)
 Os padrões criacionais fornecem vários mecanismos de criação de objetos, que aumentam a flexibilidade e reutilização de código já existente.
 
@@ -37,7 +37,7 @@ São eles:
 - [Prototype]
 - [Singleton]
 
-### Structural
+### Estruturais
 Segundo [refactoring.guru](https://refactoring.guru/)
 Os padrões estruturais explicam como montar objetos e classes em estruturas maiores mas ainda mantendo essas estruturas flexíveis e eficientes.
 
@@ -50,7 +50,7 @@ São eles:
 - [Flyweight]
 - [Proxy]
 
-### Behavioral
+### Comportamentais
 Segundo [refactoring.guru](https://refactoring.guru/)
 Padrões comportamentais são voltados aos algoritmos e a designação de responsabilidades entre objetos.
 
